@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        requestPermission()
         checkPermission()
     }
 
@@ -34,13 +33,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * カメラのパーミッションが取れているか確認.
+     * カメラのパーミッションが許可されているか確認.
+     * 許可されていない場合はパーミッションのリクエストを行う
      */
     private fun checkPermission() {
         if (checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Log.d("checkPermission", "SUCCESS")
+            Log.d("checkPermission", "Permission completed")
         } else {
-            Log.d("checkPermission", "FAILED")
+            requestPermission()
+            Log.d("checkPermission", "Permission not completed")
         }
     }
 
